@@ -1,0 +1,5 @@
+com\xiilab\eightentest\MySQLConnectionTest.class
+com\xiilab\eightentest\test.class
+com\xiilab\eightentest\BoardDAOTest.class
+com\xiilab\eightentest\MyBatisTest.class
+com\xiilab\eightentest\DataSourceTest.class

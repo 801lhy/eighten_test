@@ -1,0 +1,6 @@
+com\xiilab\eightentest\controller\BoardController.class
+com\xiilab\eightentest\service\BoardServiceImpl.class
+com\xiilab\eightentest\service\BoardService.class
+com\xiilab\eightentest\DAO\BoardDAO.class
+com\xiilab\eightentest\DAO\BoardDAOImpl.class
+com\xiilab\eightentest\VO\BoardVO.class
