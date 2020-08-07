@@ -72,29 +72,29 @@
 			 	</div>
 			 	
 			 	<hr>
-			 				 	
-			 	<table class="table table-sm table-bordered">
-					<thead class="thead-light text-center">
-					    <tr>
-					    	<th scope="col" colspan="6">[webzine vol.01] 아이튼 에이스 이근서 교육팀장을 만나 아이튼 에이스에 대해 들어 보았다!</th>
-					    </tr>
-					</thead>
-					<tbody>
-    					<tr>
-    						<td class="text-center" style="width:10%">작성자</td>
-						    <td>관리자</td>
-    						<td class="text-center" style="width:10%">작성날짜</td>
-						    <td>2020-07-14 03:06:45</td>
-    						<td class="text-center" style="width:10%">조회수</td>
-						    <td>43</td>
-						</tr>
-					</tbody>	
-				</table>
-				<h2>This is an example of portfolio detail</h2>
-				<p>
-	           		 Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-	          	</p>
-	          	
+			 	<form role="form" method="post">
+				 	<table class="table table-sm table-bordered">
+						<thead class="thead-light text-center">
+						    <tr>
+						    	<th scope="col" colspan="6">${readList}</th>
+						    </tr>
+						</thead>
+						<tbody>
+	    					<tr>
+	    						<td class="text-center" style="width:10%">작성자</td>
+							    <td>관리자</td>
+	    						<td class="text-center" style="width:10%">작성날짜</td>
+							    <td>2020-07-14 03:06:45</td>
+	    						<td class="text-center" style="width:10%">조회수</td>
+							    <td>43</td>
+							</tr>
+						</tbody>	
+					</table>
+					<h2>This is an example of portfolio detail</h2>
+					<p>
+		           		 Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+		          	</p>
+			 	</form>			 	
 	          	<hr>
 	          	<button type="button" class="btn btn-info">목록</button>
 		  	</div>

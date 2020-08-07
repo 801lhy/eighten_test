@@ -6,6 +6,8 @@
 	
 	<typeAliases>
 	<typeAlias alias="selectBoard" type="com.xiilab.eightentest.VO.BoardVO" />
+	<typeAlias alias="selectBoardList" type="com.xiilab.eightentest.VO.BoardVO" />
+	<typeAlias alias="readBoardContent" type="com.xiilab.eightentest.VO.BoardVO"/>
 	</typeAliases>
 
 </configuration>

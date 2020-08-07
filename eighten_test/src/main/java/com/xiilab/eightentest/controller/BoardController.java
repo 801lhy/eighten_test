@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
+
 import com.xiilab.eightentest.VO.BoardVO;
 import com.xiilab.eightentest.service.BoardService;
 
@@ -27,13 +29,9 @@ public class BoardController {
 	@Inject
 	BoardService service;
 	
-	/*
-	 * @Resource(name="boardService") private BoardService boardService;
-	 */
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value ="/main", method = RequestMethod.GET)
 	public String mainPage(Locale locale, Model model) {
-				
 		
 		return "main";
 	}
@@ -62,8 +60,12 @@ public class BoardController {
 		return "/edusystem/curriculum";
 	}
 	
-	@RequestMapping(value = "/board/notice", method = RequestMethod.GET)
-	public String boardNotice(Locale locale, Model model) {
+	//  1. 공지 게시글 목록 조회
+	@RequestMapping(value="/board/notice", method=RequestMethod.GET)
+	public String selectBoardList(Model model) throws Exception {
+		
+		logger.info("selectBoardList called ====");
+		model.addAttribute("boardList",service.selectBoardList());
 		
 		return "/board/notice";
 	}
@@ -86,8 +88,12 @@ public class BoardController {
 		return "/question/admission";
 	}
 	
+	// 2. 게시글 상세조회
 	@RequestMapping(value = "/board/boardContent", method = RequestMethod.GET)
-	public String boardContent(Locale locale, Model model) {
+	public String readboardContent(BoardVO board, Model model) throws Exception {
+		
+		logger.info("read boardContent called | jsp: board/boardContent.jsp ====");
+		model.addAttribute("readList", service.readBoardContent(board.getPost_idx())) ;
 		
 		return "/board/boardContent";
 	}
@@ -99,7 +105,7 @@ public class BoardController {
 		list = service.selectBoard();
 		model.addAttribute("list",list);
 		logger.info("BoardController Called ====================");
-		return "selectList"; // boardSelect.jsp
+		return "selectList"; 
 		
 	}
 	

@@ -1,6 +1,7 @@
 package com.xiilab.eightentest.service;
 
 import java.util.List;
+
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,21 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> selectBoard() throws Exception {
 		
 		return dao.selectBoard();
+	}
+	
+	
+	// 게시글 목록 조회
+	@Override
+	public List<BoardVO> selectBoardList() throws Exception {
+
+		return dao.selectBoardList();
+	}
+	
+	// 게시글 상세 조회
+	@Override
+	public BoardVO readBoardContent(int post_idx) throws Exception{
+		
+		return dao.read(post_idx);
 	}
 	
 

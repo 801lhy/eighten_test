@@ -22,7 +22,18 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> selectBoard() throws Exception{
 		
 		return sqlSession.selectList(namespace+".selectBoard");
-		
-	}
 
+	}
+	
+	// 공지 게시글 목록 조회
+	@Override
+	public List<BoardVO> selectBoardList() throws Exception{
+		return sqlSession.selectList(namespace+".selectBoardList");
+	}
+	
+	// 게시글 상세 조회
+	@Override
+	public BoardVO read(int post_idx) throws Exception{
+		return sqlSession.selectOne(namespace+".readBoardContent", post_idx);
+	}
 }

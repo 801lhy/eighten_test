@@ -33,6 +33,9 @@
 	<!-- Template Main CSS File -->
 	<link href="../resources/css/style.css" rel="stylesheet">
 	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 	
 	<!-- =======================================================
 	  * Template Name: Butterfly - v2.1.0
@@ -89,35 +92,38 @@
 			 	<table class="table table-hover text-center">
 					<thead>
 					    <tr>
-					  	  	<th scope="col" style="width:10%">번호</th>
+					  	  	<th scope="col" style="width:5%"></th>
 					  	  	<th scope="col" style="width:40%">제목</th>
 					  	  	<th scope="col" style="width:20%">작성자</th>
-					  	  	<th scope="col" style="width:20%">등록일</th>
+					  	  	<th scope="col" style="width:25%">등록일</th>
 					   		<th scope="col" style="width:10%">조회수</th>
 					    </tr>
 					</thead>
 					<tbody>
-    					<tr>
-						    <td>1</td>
-						    <td><a href="">1</a></td>
-						    <td>1</td>
-						    <td>1</td>
-						    <td>1</td>
-						</tr>
-						<tr>
-						    <td>1</td>
-						    <td><a href="">1</a></td>
-						    <td>1</td>
-						    <td>1</td>
-						    <td>1</td>
-						</tr>
-						<tr>
-						    <td>1</td>
-						    <td><a href="">1</a></td>
-						    <td>1</td>
-						    <td>1</td>
-						    <td>1</td>
-						</tr>
+					
+						<c:choose>
+							<c:when test="${fn:length(boardList)>0}">
+								<c:forEach items="${boardList}" var="list">
+									<tr>
+										<td>${list.post_idx}</td>
+										<td>
+											<a href="<c:url value='/board/boardContent?idx=${list.post_idx}'></c:url>">
+												${list.post_title}
+											</a>
+										</td>
+										<td>${list.post_writer}</td>
+										<td>${list.post_date}</td>
+										<td>${list.views}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan=5>작성된 게시글이 없습니다.</td>
+								</tr>
+							</c:otherwise>
+								
+						</c:choose>
 					</tbody>	
 				</table>
 				
