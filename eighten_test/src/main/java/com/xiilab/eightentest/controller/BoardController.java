@@ -3,7 +3,6 @@ package com.xiilab.eightentest.controller;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 //import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpServletRequest;
@@ -70,10 +69,29 @@ public class BoardController {
 		return "/board/notice";
 	}
 	
+	// 1-2. 갤러리 게시글 목록 조회
 	@RequestMapping(value = "/board/gallery", method = RequestMethod.GET)
 	public String boardGallery(Locale locale, Model model) {
 		
 		return "/board/gallery";
+	}
+	
+	// 2. 게시글 상세조회
+	@RequestMapping(value = "/board/boardContent", method = RequestMethod.GET)
+	public String readboardContent(BoardVO board, Model model) throws Exception {
+		
+		logger.info("read boardContent called | jsp: board/boardContent.jsp ====");
+		logger.info("read boardContent called | getPost_idx: "+ board.getPost_idx() +" ====");
+		
+		model.addAttribute("readList", service.readBoardContent(board.getPost_idx())) ;
+		
+		return "/board/boardContent";
+	}
+
+	@RequestMapping(value = "/board/boardWrite", method = RequestMethod.GET)
+	public String boardWrite(Locale locale, Model model) {
+		
+		return "/board/boardWrite";
 	}
 	
 	@RequestMapping(value = "/question/join", method = RequestMethod.GET)
@@ -88,15 +106,6 @@ public class BoardController {
 		return "/question/admission";
 	}
 	
-	// 2. 게시글 상세조회
-	@RequestMapping(value = "/board/boardContent", method = RequestMethod.GET)
-	public String readboardContent(BoardVO board, Model model) throws Exception {
-		
-		logger.info("read boardContent called | jsp: board/boardContent.jsp ====");
-		model.addAttribute("readList", service.readBoardContent(board.getPost_idx())) ;
-		
-		return "/board/boardContent";
-	}
 	
 	
 	@RequestMapping(value="/selectList",method=RequestMethod.GET)

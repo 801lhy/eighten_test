@@ -33,8 +33,10 @@
 	<!-- Template Main CSS File -->
 	<link href="../resources/css/style.css" rel="stylesheet">
 	
+	<!-- JSTL library -->
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 	
 	<!-- =======================================================
@@ -107,12 +109,12 @@
 									<tr>
 										<td>${list.post_idx}</td>
 										<td>
-											<a href="<c:url value='/board/boardContent?idx=${list.post_idx}'></c:url>">
+											<a href="<c:url value='/board/boardContent?post_idx=${list.post_idx}'></c:url>">
 												${list.post_title}
 											</a>
 										</td>
 										<td>${list.post_writer}</td>
-										<td>${list.post_date}</td>
+										<td><fmt:formatDate value="${list.post_date}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 										<td>${list.views}</td>
 									</tr>
 								</c:forEach>

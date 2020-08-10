@@ -25,8 +25,8 @@ XML로 작성하는 Mapper파일의 경우 Java로 작성된 클래스오 경로
 		where post_type = 0
 	</select>
 	
-	<select id = "readBoardContent" resultType="readBoardContent">
-		select post_idx, post_title, post_writer, post_date, post_view, post_content, file_name, file_path
+	<select id = "readBoardContent" parameterType="int" resultType="readBoardContent">
+		select post_idx, post_title, post_writer, post_date, views, post_content, file_name, file_path
 		from board
 		where post_idx = #{post_idx}
 	</select>

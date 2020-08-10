@@ -33,7 +33,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 게시글 상세 조회
 	@Override
-	public BoardVO read(int post_idx) throws Exception{
+	public BoardVO readBoardContent(int post_idx) throws Exception{
 		return sqlSession.selectOne(namespace+".readBoardContent", post_idx);
 	}
 }

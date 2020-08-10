@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	
-	<title>Eighten_BoardContent</title>
+	<title>Eighten_BoardWrite</title>
 	<meta content="" name="descriptison">
 	<meta content="" name="keywords">
 	
@@ -35,7 +35,6 @@
 	
 	<!-- JSTL library -->
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	
 	
@@ -58,11 +57,7 @@
 	      <div class="container">
 	
 	        <div class="d-flex justify-content-between align-items-center">
-	          <h2>공지사항 Or갤러리</h2>
-	          <ol>
-	            <li><a href="index.html">게시판</a></li>
-	            <li>공지사항 or 갤러리</li>
-	          </ol>
+	          <h2>게시글 작성</h2>
 	        </div>
 	
 	      </div>
@@ -72,38 +67,50 @@
 	    <section class="inner-page">
 			<div class="container">
 				<div class="section-title">
-			  		<h2>Notice or Gallery</h2>
-			  		<p>중요 공지사항을 꼭 확인하세요! or Aighten갤러리 입니다.</p>
+			  		<h2>Write</h2>
+			  		<p>게시글 작성</p>
 			 	</div>
+			 	<div class="col-lg-12">
+			 		<form role="form" id="writeForm" method="post" action="${pageContext.request.contextPath}/board/boardWrite">
+			 			<div class="box-body">
+			 				<div class="form-group">
+			 					<label for="title">제목</label>
+			 					<input class="form-control" id="title" placeholder="제목을 입력해 주세요">
+			 				</div>
+			 				<div class="form-group">
+			 					<label for="content">내용</label>
+			 					<textarea class="form-control" id="content" name="content" rows="30" placeholder="내용을 입력해 주세요" style="resize: none;"></textarea>
+		 					</div>
+		 					<div class="form-group">
+		 						<label for="writer">작성자</label>
+		 						<input class="form-control" id="writer" name="writer">
+		 					</div>
+		 					<!-- 첨부파일 영역 추가 -->
+		 					<div class="form-group">
+		 						<div class="fileDrop">
+		 							<br/>
+		 							<br/>
+		 							<br/>
+		 							<br/>
+		 							<p class="text-center"><i class="fa fa-paperclip"></i>첨부파일을 드래그해주세요</p>
+		 						</div>
+	 						</div>
+	 						<div class="box-footer">
+	 							<button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i>목록</button>
+	 							<div class="pull-right">
+	 								<button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i>초기화</button>
+	 								<button type="submit" class="btn btn-success"><i class="fa fa-save"></i>저장</button>
+	 							</div>
+	 						</div>
+			 			</div>
+			 		</form>
 			 	
+			 	</div>
 			 	<hr>
-			 	
-			 	<table class="table table-sm table-bordered">
-					<thead class="thead-light text-center">
-					    <tr>
-					    	<th scope="col" colspan="6">${readList.post_title}</th>
-					    </tr>
-					</thead>
-					<tbody>
-    					<tr>
-    						<td class="text-center" style="width:10%">작성자</td>
-						    <td>${readList.post_writer}</td>
-    						<td class="text-center" style="width:10%">작성날짜</td>
-						    <td><fmt:formatDate value="${readList.post_date}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
-    						<td class="text-center" style="width:10%">조회수</td>
-						    <td>${readList.views}</td>
-						</tr>
-					</tbody>	
-				</table>
-				
-				<h2>${readList.post_title}</h2>
-				<p>
-	           		 ${readList.post_content}
-	          	</p>
-	          	<hr>
-	          	<button type="button" class="btn btn-info">목록</button>
 		  	</div>
 	    </section>
+	    
+	    
 	    
 	</main>
 	<!-- End #main -->
@@ -126,12 +133,11 @@
 	<script src="../resources/vendor/owl.carousel/owl.carousel.min.js"></script>
 	<script src="../resources/vendor/owl.carousel/owl.carousel.min.js"></script>
 	
-	<!-- <script src="../resources/vendor/slick/slick.min.js"></script> -->
+	<!-- Handlebars 라이브러리 : 동적 HTML 코드 생성 -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script> -->
 	
 	<!-- Template Main JS File -->
 	<script src="../resources/js/main.js"></script>
-	
 
 </body>
-
 </html>

@@ -18,6 +18,6 @@ public interface BoardDAO {
 	public List<BoardVO> selectBoardList() throws Exception;
 	
 	// 게시글 상세 조회
-	public BoardVO read(int post_idx) throws Exception;
+	public BoardVO readBoardContent(int post_idx) throws Exception;
 	
 }

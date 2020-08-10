@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public BoardVO readBoardContent(int post_idx) throws Exception{
 		
-		return dao.read(post_idx);
+		return dao.readBoardContent(post_idx);
 	}
 	
 
