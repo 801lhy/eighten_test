@@ -129,6 +129,25 @@
 					</tbody>	
 				</table>
 				
+				<div class="box-footer">
+					<div class="text-center">
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<li><a href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.startPage-1}">이전</a></li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+								<li <c:out value="${pageMaker.criteria.page==idx?'class=active':''}"/>>
+									<a href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageMaker.next&&pageMaker.endPage>0}">
+								<li><a href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.endPage+1}">다음</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+				
+				
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
 				    <li class="page-item">
@@ -146,6 +165,7 @@
 				    </li>
 				  </ul>
 				</nav>
+				
 		  	</div>
 	    </section>
 	    

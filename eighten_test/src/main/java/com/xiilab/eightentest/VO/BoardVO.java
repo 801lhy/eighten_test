@@ -13,6 +13,12 @@ public class BoardVO {
 	private String post_content;
 	private String file_path;
 	private String file_name;
+	
+	private String org_file_name;
+	private String stored_file_name;
+	private int file_size;
+	
+		
 	public int getPost_type() {
 		return post_type;
 	}
@@ -55,6 +61,9 @@ public class BoardVO {
 	public void setPost_content(String post_content) {
 		this.post_content = post_content;
 	}
+	
+	//=======================
+	
 	public String getFile_path() {
 		return file_path;
 	}
@@ -66,6 +75,24 @@ public class BoardVO {
 	}
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
+	}
+	public String getOrg_file_name() {
+		return org_file_name;
+	}
+	public void setOrg_file_name(String org_file_name) {
+		this.org_file_name = org_file_name;
+	}
+	public String getStored_file_name() {
+		return stored_file_name;
+	}
+	public void setStored_file_name(String stored_file_name) {
+		this.stored_file_name = stored_file_name;
+	}
+	public int getFile_size() {
+		return file_size;
+	}
+	public void setFile_size(int file_size) {
+		this.file_size = file_size;
 	}
 	
 	

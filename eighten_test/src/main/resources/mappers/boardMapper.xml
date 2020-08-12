@@ -22,7 +22,9 @@ XML로 작성하는 Mapper파일의 경우 Java로 작성된 클래스오 경로
 	<select id = "selectBoardList" resultType = "selectBoardList" >
 		select post_idx, views, post_title, post_writer, post_date
 		from board
-		where post_type = 0
+		where post_idx > 0
+		order by post_idx DESC, post_date DESC
+		limit #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id = "readBoardContent" parameterType="int" resultType="readBoardContent">
@@ -30,5 +32,18 @@ XML로 작성하는 Mapper파일의 경우 Java로 작성된 클래스오 경로
 		from board
 		where post_idx = #{post_idx}
 	</select>
+	
+	<insert id="insert" parameterType="insert" useGeneratedKeys="true" keyProperty="post_idx">
+	    <selectKey keyProperty="post_idx" resultType="int" order="BEFORE">
+	    	SELECT MP_BOARD_SEQ.NEXTVAL FROM DUAL
+	    </selectKey>
+   			insert into board ( post_idx, post_title, post_content, post_writer )
+   			values ( #{post_idx}, #{post_title}, #{post_content}, #{post_writer} )
+    </insert>
+    
+    <insert id="insertFile" parameterType="hashMap">
+    	insert into file ( file_no, post_idx, org_file_name, stored_file_-name, file_size)
+    	values (#{post_idx}, ${org_file_name}, {$stored_file_name), {$file_size} )
+    </insert>
 	
 </mapper>

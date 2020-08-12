@@ -70,8 +70,9 @@
 			  		<h2>Write</h2>
 			  		<p>게시글 작성</p>
 			 	</div>
+			 	
 			 	<div class="col-lg-12">
-			 		<form role="form" id="writeForm" method="post" action="${pageContext.request.contextPath}/board/boardWrite">
+			 		<form role="form" id="writeForm" method="post" action="${pageContext.request.contextPath}/board/write" enctype="multipart/form-data">
 			 			<div class="box-body">
 			 				<div class="form-group">
 			 					<label for="title">제목</label>
@@ -85,23 +86,12 @@
 		 						<label for="writer">작성자</label>
 		 						<input class="form-control" id="writer" name="writer">
 		 					</div>
-		 					<!-- 첨부파일 영역 추가 -->
-		 					<div class="form-group">
-		 						<div class="fileDrop">
-		 							<br/>
-		 							<br/>
-		 							<br/>
-		 							<br/>
-		 							<p class="text-center"><i class="fa fa-paperclip"></i>첨부파일을 드래그해주세요</p>
-		 						</div>
-	 						</div>
-	 						<div class="box-footer">
-	 							<button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i>목록</button>
-	 							<div class="pull-right">
-	 								<button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i>초기화</button>
-	 								<button type="submit" class="btn btn-success"><i class="fa fa-save"></i>저장</button>
-	 							</div>
-	 						</div>
+		 					
+ 							<input type="file" name="file">
+ 							
+ 							<hr>
+	 							<button type="button" class="btn btn-primary listBtn"></i>목록</button>
+ 								<button type="submit" class="btn btn-success">작성</button>
 			 			</div>
 			 		</form>
 			 	
@@ -109,8 +99,6 @@
 			 	<hr>
 		  	</div>
 	    </section>
-	    
-	    
 	    
 	</main>
 	<!-- End #main -->
@@ -138,6 +126,31 @@
 	
 	<!-- Template Main JS File -->
 	<script src="../resources/js/main.js"></script>
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var formObj = $("form[name='writeForm']");
+			$(".btn btn-success").on("click", function(){
+				if(fn_valiChk()){
+					return false;
+				}
+				formObj.attr("action", "${pageContext.request.contextPath}/board/write");
+				formObj.attr("method", "post");
+				formObj.submit();
+			});
+		})
+		function fn_valiChk(){
+			var regForm = $("form[name='writeForm'] .chk").length;
+			for(var i = 0; i<regForm; i++){
+				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
+					alert($(".chk").eq(i).attr("title"));
+					return true;
+				}
+			}
+		}
+	</script>
+	
 
 </body>
 </html>

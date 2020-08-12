@@ -157,8 +157,7 @@
 			<version>1.4</version>
 		</dependency>
 		
-		<!-- 첨부파일 -->
-		<!-- MultipartHttpServletRequset -->
+		<!-- 첨부파일 START MultipartHttpServletRequset  -->
 		 <dependency>
 			 <groupId>commons-io</groupId>
 			 <artifactId>commons-io</artifactId>
@@ -170,7 +169,6 @@
 			 <artifactId>commons-fileupload</artifactId>
 			 <version>1.2.2</version>
 		 </dependency>
-		
 		       
 	</dependencies>
     <build>

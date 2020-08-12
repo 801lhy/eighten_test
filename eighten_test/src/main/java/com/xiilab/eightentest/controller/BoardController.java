@@ -9,15 +9,15 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.xiilab.eightentest.VO.BoardVO;
+import com.xiilab.eightentest.VO.Criteria;
+import com.xiilab.eightentest.VO.PageMaker;
 import com.xiilab.eightentest.service.BoardService;
 
 @Controller
@@ -61,10 +61,16 @@ public class BoardController {
 	
 	//  1. 공지 게시글 목록 조회
 	@RequestMapping(value="/board/notice", method=RequestMethod.GET)
-	public String selectBoardList(Model model) throws Exception {
+	public String selectBoardList(Model model, Criteria criteria) throws Exception {
 		
-		logger.info("selectBoardList called ====");
-		model.addAttribute("boardList",service.selectBoardList());
+		logger.info(" ==== selectBoardList called  ====");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(135); // 전체 게시글의 갯수를 구하는 로직 구현 x
+		
+		model.addAttribute("boardList", service.selectBoardList(criteria));
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "/board/notice";
 	}
@@ -78,20 +84,32 @@ public class BoardController {
 	
 	// 2. 게시글 상세조회
 	@RequestMapping(value = "/board/boardContent", method = RequestMethod.GET)
-	public String readboardContent(BoardVO board, Model model) throws Exception {
+	public String readboardContent(BoardVO boardVO, Model model) throws Exception {
 		
-		logger.info("read boardContent called | jsp: board/boardContent.jsp ====");
-		logger.info("read boardContent called | getPost_idx: "+ board.getPost_idx() +" ====");
+		logger.info(" ==== read boardContent called | getPost_idx: "+ boardVO.getPost_idx() +" ====");
 		
-		model.addAttribute("readList", service.readBoardContent(board.getPost_idx())) ;
+		model.addAttribute("readList", service.readBoardContent(boardVO.getPost_idx())) ;
 		
 		return "/board/boardContent";
 	}
-
+	
+	// 3-1. 게시글 작성 화면
 	@RequestMapping(value = "/board/boardWrite", method = RequestMethod.GET)
-	public String boardWrite(Locale locale, Model model) {
+	public String boardWrite() throws Exception {
+		
+		logger.info(" ==== boardWrite called ====");
 		
 		return "/board/boardWrite";
+	}
+
+	// 3-2. 게시글 작성
+	@RequestMapping(value = "*/board/write", method = RequestMethod.POST)
+	public String Write(BoardVO boardVO, MultipartHttpServletRequest mpRequest) throws Exception{
+		
+		logger.info(" ==== Write called ====");
+		service.write(boardVO, mpRequest);
+		
+		return "redirect:/board/notice";
 	}
 	
 	@RequestMapping(value = "/question/join", method = RequestMethod.GET)
