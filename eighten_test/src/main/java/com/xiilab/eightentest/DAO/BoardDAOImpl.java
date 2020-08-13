@@ -26,7 +26,6 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(namespace+".selectBoard");
 
 	}
-	
 	// 공지 게시글 목록 조회
 	@Override
 	public List<BoardVO> selectBoardList(Criteria criteria) throws Exception{
@@ -51,5 +50,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public void insertFile(Map<String, Object> map) throws Exception{
 		
 		sqlSession.insert(namespace+".insertFile",map);
+	}
+	
+	// 게시글 목록 갯수 조회
+	@Override
+	public int countBoardList(Criteria criteria) throws Exception{
+		return sqlSession.selectOne(namespace+".countBoardList",criteria);
 	}
 }

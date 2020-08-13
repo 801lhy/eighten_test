@@ -28,5 +28,7 @@ public interface BoardDAO {
 	// 첨부파일 업로드
 	public void insertFile(Map<String, Object> map) throws Exception;
 	
+	// 게시글 목록 갯수 조회
+	public int countBoardList(Criteria criteria) throws Exception;
 	
 }

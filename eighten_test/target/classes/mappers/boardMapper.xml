@@ -45,5 +45,10 @@ XML로 작성하는 Mapper파일의 경우 Java로 작성된 클래스오 경로
     	insert into file ( file_no, post_idx, org_file_name, stored_file_-name, file_size)
     	values (#{post_idx}, ${org_file_name}, {$stored_file_name), {$file_size} )
     </insert>
+    
+    <select id="countBoardList" resultType="int">
+    	select count(post_idx)
+    	from board
+    </select>
 	
 </mapper>

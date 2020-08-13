@@ -57,6 +57,10 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 	
-
+	// 게시글 목록 갯수 조회
+	@Override
+	public int countBoardList(Criteria criteria) throws Exception{
+		return dao.countBoardList(criteria);
+	}
 
 }

@@ -129,7 +129,7 @@
 					</tbody>	
 				</table>
 				
-				<div class="box-footer">
+			<%-- 	<div class="box-footer">
 					<div class="text-center">
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">
@@ -145,24 +145,60 @@
 							</c:if>
 						</ul>
 					</div>
-				</div>
+				</div> --%>
 				
+				
+			<%-- 	<nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				  	<c:if test="${pageMaker.prev}">
+					    <li class="page-item">
+					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.startPage-1}" aria-label="Previous">
+					    	<span aria-hidden="true">&laquo;</span></a>
+					    </li>
+				    </c:if>
+				    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a></li>
+				    </c:forEach>
+				    <c:if test="${pageMaker.next&&pageMaker.endPage>0}">
+					    <li class="page-item">
+					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.endPage+1}" aria-label="Next">
+					      	<span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+				    </c:if>
+				  </ul>
+				</nav> --%>
 				
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
+				  
+				  	<c:if test="${pageMaker.prev}">
+					    <li class="page-item">
+					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempStartPage}" aria-label="Previous">
+					    	<span aria-hidden="true">${pageMaker.tempStartPage}</span></a>
+					    </li>
+					    <li class="page-item disabled"><a class="page-link">...</a></li>
+				    </c:if>
+				    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				    	<c:choose>
+				    		<c:when test="${pageMaker.nowPage==idx}">
+						    	<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a></li>
+				    		</c:when>
+				    		<c:otherwise>
+						    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a></li>
+				    		</c:otherwise>
+				    	</c:choose>
+				    </c:forEach>
+				    
+				    <c:if test="${pageMaker.next}">
+				    	<li class="page-item disabled"><a class="page-link">...</a></li>
+					    <li class="page-item">
+					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempEndPage}" aria-label="Next">
+					      	<span aria-hidden="true">${pageMaker.tempEndPage}</span>
+					      </a>
+					    </li>
+				    </c:if>
+				    
 				  </ul>
 				</nav>
 				

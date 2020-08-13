@@ -22,4 +22,7 @@ public interface BoardService {
 		
 		// 게시글 작성
 		public void write(BoardVO boardVO, MultipartHttpServletRequest mpRequest) throws Exception;
+		
+		// 게시글 목록 갯수 조회
+		public int countBoardList(Criteria criteria) throws Exception;
 }

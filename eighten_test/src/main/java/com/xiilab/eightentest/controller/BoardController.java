@@ -67,7 +67,7 @@ public class BoardController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(135); // 전체 게시글의 갯수를 구하는 로직 구현 x
+		pageMaker.setTotalCount(service.countBoardList(criteria)); // 전체 게시글의 갯수를 구하는 로직
 		
 		model.addAttribute("boardList", service.selectBoardList(criteria));
 		model.addAttribute("pageMaker", pageMaker);
@@ -110,6 +110,12 @@ public class BoardController {
 		service.write(boardVO, mpRequest);
 		
 		return "redirect:/board/notice";
+	}
+	
+	@RequestMapping(value = "/introduce/test", method = RequestMethod.GET)
+	public String testAPI(Locale locale, Model model) {
+		
+		return "/introduce/test";
 	}
 	
 	@RequestMapping(value = "/question/join", method = RequestMethod.GET)

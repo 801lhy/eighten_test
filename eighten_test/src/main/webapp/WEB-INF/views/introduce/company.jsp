@@ -111,8 +111,9 @@
 					</div>
 				</div>
 			</div>	
-	    </section>
-
+			
+	    </section>		
+		
 	</main>
 	<!-- End #main -->
 	
@@ -138,6 +139,7 @@
 	
 	<!-- Template Main JS File -->
 	<script src="../resources/js/main.js"></script>
+	
 	
 
 </body>
