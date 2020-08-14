@@ -75,22 +75,26 @@
 			  		<h2>Notice</h2>
 			  		<p>중요 공지사항을 꼭 확인하세요!</p>
 			 	</div>
-			 	
 			 
-			 	<div class="row table_search mb-2 mt-2">
-				    <div class="col-md-3 offset-md-5 row justify-content-end">
-				        <select name="field" class="col-md-6">
-				            <option value="">제목</option>
-				            <option value="">내용</option>
-				        </select>
-				    </div>
-				    <form class="col-md-4 row search_form">
-				        <input class="col-md-8" placeholder="검색 키워드 입력" aria-label="Search">
-				        <button class="btn col-md-4 btn-info" type="submit">Search</button>
-				    </form>
+				<div class="row justify-content-end">
+					<div class="form-group col-md-2">
+						<select class="form-control" name="searchType" id="searchType">
+							<option value="n" <c:out value="${searchCriteria.searchType == null ? 'selected' : '' }"/>>::: 선택 :::</option>
+							<option value="t" <c:out value="${searchCriteria.searchType eq 't' ? 'selected' : '' }"/>>제목</option>
+							<option value="c" <c:out value="${searchCriteria.searchType eq 'c' ? 'selected' : '' }"/>>내용</option>
+						</select>
+					</div>
+					<div class="input-group col-md-3 row">
+						<input type="text" class="form-control" name="keyword" id="keywordInput" value="${searchCriteria.keyword}", placeholder="검색 키워드 입력"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-primary btn-flat" id="searchBtn">
+								<i class="fa fa-search">Search</i>
+							</button>
+						</span>
+					</div>
 				</div>
-				 	
 			 	
+			 	<!-- ========= 표 시작 ========= -->
 			 	<table class="table table-hover text-center">
 					<thead>
 					    <tr>
@@ -102,14 +106,14 @@
 					    </tr>
 					</thead>
 					<tbody>
-					
 						<c:choose>
 							<c:when test="${fn:length(boardList)>0}">
 								<c:forEach items="${boardList}" var="list">
 									<tr>
 										<td>${list.post_idx}</td>
 										<td>
-											<a href="<c:url value='/board/boardContent?post_idx=${list.post_idx}'></c:url>">
+											<%-- <a href="<c:url value='/board/boardContent?post_idx=${list.post_idx}'></c:url>">${list.post_title}</a> --%>
+											<a href="<c:url value='/board/boardContent${pageMaker.makeQuery(pageMaker.criteria.page)}&post_idx=${list.post_idx}'></c:url>">
 												${list.post_title}
 											</a>
 										</td>
@@ -124,76 +128,53 @@
 									<td colspan=5>작성된 게시글이 없습니다.</td>
 								</tr>
 							</c:otherwise>
-								
 						</c:choose>
 					</tbody>	
 				</table>
 				
-			<%-- 	<div class="box-footer">
-					<div class="text-center">
-						<ul class="pagination">
-							<c:if test="${pageMaker.prev}">
-								<li><a href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.startPage-1}">이전</a></li>
-							</c:if>
-							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-								<li <c:out value="${pageMaker.criteria.page==idx?'class=active':''}"/>>
-									<a href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker.next&&pageMaker.endPage>0}">
-								<li><a href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.endPage+1}">다음</a></li>
-							</c:if>
-						</ul>
-					</div>
-				</div> --%>
-				
-				
-			<%-- 	<nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
-				  	<c:if test="${pageMaker.prev}">
-					    <li class="page-item">
-					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.startPage-1}" aria-label="Previous">
-					    	<span aria-hidden="true">&laquo;</span></a>
-					    </li>
-				    </c:if>
-				    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a></li>
-				    </c:forEach>
-				    <c:if test="${pageMaker.next&&pageMaker.endPage>0}">
-					    <li class="page-item">
-					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.endPage+1}" aria-label="Next">
-					      	<span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-				    </c:if>
-				  </ul>
-				</nav> --%>
-				
+				<!-- ======== 페이징 처리 ======== -->
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
-				  
+				  	<!-- ====== 1 PAGE ====== -->
 				  	<c:if test="${pageMaker.prev}">
 					    <li class="page-item">
-					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempStartPage}" aria-label="Previous">
+					    	<%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempStartPage}" aria-label="Previous"> --%>
+					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(pageMaker.tempstartPage)}" aria-label="Previous">
 					    	<span aria-hidden="true">${pageMaker.tempStartPage}</span></a>
 					    </li>
 					    <li class="page-item disabled"><a class="page-link">...</a></li>
 				    </c:if>
+				    
+				    <!-- ====== CENTER PAGES ====== -->
 				    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				    	
 				    	<c:choose>
+					    	<!-- ====== CENTER PAGE Active effect ====== -->
 				    		<c:when test="${pageMaker.nowPage==idx}">
-						    	<li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a></li>
+						    	<li class="page-item active">
+						    		<%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a> --%>
+						    		<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(idx)}">${idx}</a>
+						    	</li>
 				    		</c:when>
+												    		
 				    		<c:otherwise>
-						    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a></li>
+						    	<li class="page-item">
+						    		<%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a> --%>
+						    		<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(idx)}">${idx}</a>
+					    		</li>
 				    		</c:otherwise>
 				    	</c:choose>
+				    	
 				    </c:forEach>
 				    
+				    <!-- ====== LAST PAGE ====== -->
 				    <c:if test="${pageMaker.next}">
 				    	<li class="page-item disabled"><a class="page-link">...</a></li>
 					    <li class="page-item">
-					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempEndPage}" aria-label="Next">
+					      <%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempEndPage}" aria-label="Next">
+					      	<span aria-hidden="true">${pageMaker.tempEndPage}</span>
+					      </a> --%>
+					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(pageMaker.tempEndPage)}" aria-label="Next">
 					      	<span aria-hidden="true">${pageMaker.tempEndPage}</span>
 					      </a>
 					    </li>

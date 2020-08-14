@@ -38,7 +38,7 @@
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
 		            content: '<div class="wrap">' + 
-		            '    <div class="info">' + 
+		            '    <div class="info" style="padding:5px">' + 
 		            '        <div class="title">' + 
 		            '            Xiilab 씨이랩' + 
 		            '        </div>' + 

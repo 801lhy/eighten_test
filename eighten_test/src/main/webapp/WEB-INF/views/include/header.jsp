@@ -13,16 +13,16 @@
 
 			<nav class="nav-menu d-none d-lg-block">
 				<ul>
-					<li class="drop-down"><a href="${pageContext.request.contextPath}/introduce/company">아이튼 소개</a>
+					<li class="drop-down"><a href="${pageContext.request.contextPath}/intro_company">아이튼 소개</a>
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/introduce/company">회사 소개</a></li>
-							<li><a href="${pageContext.request.contextPath}/introduce/education">교육 특징</a></li>
-							<li><a href="${pageContext.request.contextPath}/introduce/value">교육 철학</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro_company">회사 소개</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro_education">교육 특징</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro_value">교육 철학</a></li>
 						</ul>
 					</li>
-					<li class="drop-down"><a href="${pageContext.request.contextPath}/edusystem/curriculum">교육 시스템</a>
+					<li class="drop-down"><a href="${pageContext.request.contextPath}/intro_curriculum">교육 시스템</a>
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/edusystem/curriculum">교육과정</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro_curriculum">교육과정</a></li>
 						</ul>
 					</li>
 					<li class="drop-down"><a href="${pageContext.request.contextPath}/board/notice">게시판</a>
@@ -33,8 +33,8 @@
 					</li>
 					<li class="drop-down"><a href="">문의</a>
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/question/admission">입학 상담</a></li>
-							<li><a href="${pageContext.request.contextPath}/question/join">가맹 문의</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro_admission">입학 상담</a></li>
+							<li><a href="${pageContext.request.contextPath}/intro_join">가맹 문의</a></li>
 						</ul>
 					</li>
 					<li><a href="https://www.duru.io/main">크라우드소싱 신규사업</a></li>
