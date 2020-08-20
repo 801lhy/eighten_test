@@ -60,25 +60,26 @@ public class PageMaker {
 		
 	}
 	
-	/* UriComponentsBilder, UriComponents : URI를 작성할 때 도움을 주는 클래스 */
-	public String makeQuery(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance()
-				.queryParam("page", page)
-				.queryParam("pagePageNum", criteria.getPerPageNum())
-				.build();
-		
-		return uriComponents.toUriString();
-	}
-				
+//	/* UriComponentsBilder, UriComponents : URI를 작성할 때 도움을 주는 클래스 */
+//	public String makeQuery(int page) {
+//	
+//		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+//				.queryParam("page", page)
+//				.queryParam("pagePageNum", criteria.getPerPageNum())
+//				.build();
+//		
+//		return uriComponents.toUriString();
+//	}
+//				
 	
 	/* URL 을 자동으로 생성  | makeSearch : 검색조건, 검색 키워드 처리 | encoding : 검색 키워드 인코딩 처리 */
 	public String makeSearch(int page) {
 		
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
-				.queryParam("pagePageNum", criteria.getPerPageNum())
-				.queryParam("searchType", ((SearchCriteria)criteria).getSearchType())
-				.queryParam("keeyword", encoding(((SearchCriteria) criteria).getKeyword()))
+				.queryParam("pagePageNum", criteria.getPerPageNum() )
+				.queryParam("searchType", criteria.getSearchType() )
+				.queryParam("keyword", encoding(criteria.getKeyword()) )
 				.build();
  		
 		return uriComponents.toUriString();

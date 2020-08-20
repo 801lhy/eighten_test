@@ -16,6 +16,12 @@ public interface BoardService {
 		
 		// 공지 게시글 목록 조회
 		public List<BoardVO> selectBoardList(Criteria criteria) throws Exception;
+		
+		// 검색 목록 리턴
+		public List<BoardVO> searchBoardList(Criteria criteria) throws Exception;
+		
+		// 검색된 게시글 갯수 리턴
+		int countSearchedContents(Criteria criteria) throws Exception;
 
 		// 게시글 상세조회
 		public BoardVO readBoardContent(int post_idx) throws Exception;

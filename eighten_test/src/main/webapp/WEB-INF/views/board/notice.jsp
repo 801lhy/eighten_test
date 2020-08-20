@@ -76,16 +76,18 @@
 			  		<p>중요 공지사항을 꼭 확인하세요!</p>
 			 	</div>
 			 
+			 
+			 	<!-- ========= 검색 ========= -->
 				<div class="row justify-content-end">
 					<div class="form-group col-md-2">
 						<select class="form-control" name="searchType" id="searchType">
-							<option value="n" <c:out value="${searchCriteria.searchType == null ? 'selected' : '' }"/>>::: 선택 :::</option>
-							<option value="t" <c:out value="${searchCriteria.searchType eq 't' ? 'selected' : '' }"/>>제목</option>
-							<option value="c" <c:out value="${searchCriteria.searchType eq 'c' ? 'selected' : '' }"/>>내용</option>
+							<option value="n" <c:out value="${criteria.searchType == null ? 'selected' : '' }"/>>::: 선택 :::</option>
+							<option value="t" <c:out value="${criteria.searchType eq 't' ? 'selected' : '' }"/>>제목</option>
+							<option value="c" <c:out value="${criteria.searchType eq 'c' ? 'selected' : '' }"/>>내용</option>
 						</select>
 					</div>
 					<div class="input-group col-md-3 row">
-						<input type="text" class="form-control" name="keyword" id="keywordInput" value="${searchCriteria.keyword}", placeholder="검색 키워드 입력"/>
+						<input type="text" class="form-control" name="keyword" id="keywordInput" value="${creteria.keyword}" placeholder="검색 키워드 입력"/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-primary btn-flat" id="searchBtn">
 								<i class="fa fa-search">Search</i>
@@ -112,8 +114,7 @@
 									<tr>
 										<td>${list.post_idx}</td>
 										<td>
-											<%-- <a href="<c:url value='/board/boardContent?post_idx=${list.post_idx}'></c:url>">${list.post_title}</a> --%>
-											<a href="<c:url value='/board/boardContent${pageMaker.makeQuery(pageMaker.criteria.page)}&post_idx=${list.post_idx}'></c:url>">
+											<a href="<c:url value='/board/boardContent${pageMaker.makeSearch(pageMaker.criteria.page)}&post_idx=${list.post_idx}'></c:url>">
 												${list.post_title}
 											</a>
 										</td>
@@ -135,11 +136,11 @@
 				<!-- ======== 페이징 처리 ======== -->
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
+				  
 				  	<!-- ====== 1 PAGE ====== -->
 				  	<c:if test="${pageMaker.prev}">
 					    <li class="page-item">
-					    	<%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempStartPage}" aria-label="Previous"> --%>
-					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(pageMaker.tempstartPage)}" aria-label="Previous">
+					    	<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeSearch(pageMaker.tempstartPage)}" aria-label="Previous">
 					    	<span aria-hidden="true">${pageMaker.tempStartPage}</span></a>
 					    </li>
 					    <li class="page-item disabled"><a class="page-link">...</a></li>
@@ -149,18 +150,15 @@
 				    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 				    	
 				    	<c:choose>
-					    	<!-- ====== CENTER PAGE Active effect ====== -->
 				    		<c:when test="${pageMaker.nowPage==idx}">
 						    	<li class="page-item active">
-						    		<%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a> --%>
-						    		<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(idx)}">${idx}</a>
+						    		<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeSearch(idx)}">${idx}</a>
 						    	</li>
 				    		</c:when>
 												    		
 				    		<c:otherwise>
 						    	<li class="page-item">
-						    		<%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${idx}">${idx}</a> --%>
-						    		<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(idx)}">${idx}</a>
+						    		<a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeSearch(idx)}">${idx}</a>
 					    		</li>
 				    		</c:otherwise>
 				    	</c:choose>
@@ -171,10 +169,7 @@
 				    <c:if test="${pageMaker.next}">
 				    	<li class="page-item disabled"><a class="page-link">...</a></li>
 					    <li class="page-item">
-					      <%-- <a class="page-link" href="${pageContext.request.contextPath}/board/notice?page=${pageMaker.tempEndPage}" aria-label="Next">
-					      	<span aria-hidden="true">${pageMaker.tempEndPage}</span>
-					      </a> --%>
-					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(pageMaker.tempEndPage)}" aria-label="Next">
+					      <a class="page-link" href="${pageContext.request.contextPath}/board/notice${pageMaker.makeSearch(pageMaker.tempEndPage)}" aria-label="Next">
 					      	<span aria-hidden="true">${pageMaker.tempEndPage}</span>
 					      </a>
 					    </li>
@@ -207,10 +202,21 @@
 	<script src="../resources/vendor/owl.carousel/owl.carousel.min.js"></script>
 	<script src="../resources/vendor/owl.carousel/owl.carousel.min.js"></script>
 	
-	<!-- <script src="../resources/vendor/slick/slick.min.js"></script> -->
 	
 	<!-- Template Main JS File -->
 	<script src="../resources/js/main.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			
+			$("#searchBtn").click(function(){
+				self.location =
+					${pageContext.request.contextPath} +"/board/notice${pageMaker.makeSearch(1)}"
+					+ "&searchType=" + $("select option:selected").val()
+					+ "&keyword=" + encodeURIComponent($("#keywordInput").val());
+			});
+		});
+	</script>
 	
 
 </body>

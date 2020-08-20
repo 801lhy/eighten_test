@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.xiilab.eightentest.VO.BoardVO;
 import com.xiilab.eightentest.VO.Criteria;
 import com.xiilab.eightentest.VO.PageMaker;
-import com.xiilab.eightentest.VO.SearchCriteria;
 import com.xiilab.eightentest.service.BoardService;
 
 @Controller
@@ -38,9 +37,11 @@ public class BoardController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(service.countBoardList(criteria)); // 전체 게시글의 갯수를 구하는 로직
+//		pageMaker.setTotalCount(service.countBoardList(criteria)); // 전체 게시글의 갯수를 구하는 로직
+		pageMaker.setTotalCount(service.countSearchedContents(criteria));
 		
-		model.addAttribute("boardList", service.selectBoardList(criteria));
+//		model.addAttribute("boardList", service.selectBoardList(criteria));
+		model.addAttribute("boardList",service.searchBoardList(criteria));
 		model.addAttribute("pageMaker", pageMaker);
 		
 		return "/board/notice";
@@ -48,15 +49,15 @@ public class BoardController {
 	
 	// 1-2. 게시글 조건 검색
 	@RequestMapping(value="/boardSearch", method = RequestMethod.GET)
-	public String boardSearch(SearchCriteria searchCriteria, Model model) throws Exception {
+	public String boardSearch(Model model, Criteria criteria) throws Exception {
 		logger.info(" ==== BoardSearch called ====");
 		
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(searchCriteria);
-		pageMaker.setTotalCount(service.countBoardList(searchCriteria));
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(service.countBoardList(criteria));
 		
-		model.addAttribute("board",service.countBoardList(searchCriteria));
-		model.addAttribute("pageMaker",pageMaker);
+		model.addAttribute("boardList", service.selectBoardList(criteria));
+		model.addAttribute("pageMaker", pageMaker);
 		
 		return "/board/notice";
 	}

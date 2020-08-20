@@ -37,6 +37,18 @@ public class BoardServiceImpl implements BoardService{
 		return dao.selectBoardList(criteria);
 	}
 	
+	// 검색 목록 리턴
+	@Override
+	public List<BoardVO> searchBoardList(Criteria criteria) throws Exception{
+		return dao.searchBoardList(criteria);
+	}
+	
+	// 검색된 게시글 갯수 리턴
+	@Override
+	public int countSearchedContents(Criteria criteria) throws Exception{
+		return dao.countSearchedContents(criteria);
+	}
+	
 	// 게시글 상세 조회
 	@Override
 	public BoardVO readBoardContent(int post_idx) throws Exception{

@@ -27,6 +27,33 @@ XML로 작성하는 Mapper파일의 경우 Java로 작성된 클래스오 경로
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	
+	<select id="searchBoardList" resultType = "selectBoardList" >
+		SELECT post_idx, post_title, post_writer, post_date, views
+		FROM board
+		WHERE post_idx > 0
+		<include refid="search"/>
+		ORDER BY post_idx DESC, post_date DESC
+		LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="countSearchedContents" resultType="int">
+		SELECT COUNT(post_idx)
+		FROM board
+		WHERE post_idx > 0
+		<include refid="search"/>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND post_title LIKE CONTACT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND post_content LIKE CONTACT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	
 	<select id = "readBoardContent" parameterType="int" resultType="readBoardContent">
 		select post_idx, post_title, post_writer, post_date, views, post_content, file_name, file_path
 		from board

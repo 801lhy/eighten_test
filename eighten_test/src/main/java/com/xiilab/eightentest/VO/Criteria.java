@@ -3,7 +3,12 @@ package com.xiilab.eightentest.VO;
 public class Criteria {
 	
 	private int page;		// 현재 페이지 번호
-	private int perPageNum;	// 페이지당 보여줄 게시글의 갯수	
+	private int perPageNum;	// 페이지당 보여줄 게시글의 갯수
+	
+	private String searchType; // 검색 종류
+	private String keyword; // 검색 키워드
+	
+	
 	
 	// 게시글 시작행 번호
 	public int getPageStart() {
@@ -38,6 +43,24 @@ public class Criteria {
 		} else {
 			this.perPageNum = pageCount;
 		}
+	}
+
+	// Search
+	
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 	
